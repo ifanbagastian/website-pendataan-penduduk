@@ -10,6 +10,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var customers = require('./routes/customers');
 var penduduk = require('./routes/penduduk');
+var Kematian = require('./routes/kematian');
+var kelahiran = require('./routes/kelahiran');
 var expressValidator = require('express-validator');
 var methodOverride = require('method-override');
 var connection = require('express-myconnection');
@@ -53,6 +55,8 @@ app.use('/', index);
 app.use('/customers', customers);
 app.use('/users', users);
 app.use('/penduduk', penduduk);
+app.use('/kematian', Kematian);
+app.use('/kelahiran', kelahiran);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

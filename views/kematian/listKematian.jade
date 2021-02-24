@@ -27,7 +27,7 @@ block content
                         | !{messages.msg_error}
                 a(href='customers/add').pull-left.btn.btn-primary
                     i.fa.fa-plus
-                    |   Tambah Penduduk
+                    |   Tambah Data 
                 .data-table
                     table.table.table-bordered
                         tr
@@ -38,13 +38,9 @@ block content
                             th
                                 | Nama
                             th
-                                | Jenis Kelamin
+                                | Tanggal Meninggal
                             th
-                                | Alamat
-                            th
-                                | Agama
-                            th
-                                | Pekerjaan
+                                | Penyebab
                             th
                                 | Action
                             if messages.msg_error
@@ -56,8 +52,6 @@ block content
                                         td #{row.name}
                                         td #{row.address}
                                         td #{row.email}
-                                        td #{row.phone}
-                                        td #{row.phone}
                                         td #{row.phone}
                                         td
                                             div(style='display:inlineblock')
