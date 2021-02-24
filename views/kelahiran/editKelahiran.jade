@@ -1,0 +1,56 @@
+extends ../layout/base
+block content
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Edit Data Kelahiran
+            .box-tools.pull-right
+                button(type='button', data-widget='collapse', datatoggle='tooltip',title='collapse').btn.btn-box-tool
+                    i.fa.fa-minus
+
+            .box-body
+                form(role='form',method='post' action='/kelahiran/editkelahiran/#{(id==undefined) ? data.id : id}')
+                    .row
+
+                        .col-xs-6
+                            .box-body
+                                - if (messages.msg_error)
+                                    .alert.alert-danger.alert-dismissable
+                                        button.close(type='button', datadismiss='alert', aria-hidden='true')
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert!
+                                        | !{messages.msg_error}
+                                - if (messages.msg_info)
+                                    .alert.alert-success.alertdismissable
+                                        button.close(type='button', datadismiss='alert', aria-hidden='true')
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-check
+                                            | Berhasil!
+                                        | !{messages.msg_info}
+                                .form-group
+                                    label
+                                        | Nama
+                                    input(type='text',value="#{data.nama}",name='nama',placeholder='Masukan Nama', autofocus).form-control
+                                .form-group
+                                    label
+                                        | TTL
+                                    input(type='text',value="#{ (ttl == undefined) ? data.ttl : ttl }",name='ttl',placeholder='Masukan Tempat Tanggal Lahir').form-control
+                                .form-group
+                                    label
+                                        | Jenis Kelamin
+                                    input(type='text',value="#{ (jeniskelamin ==undefined) ? data.jeniskelamin : jeniskelamin }",name='jeniskelamin',placeholder='Masukan Jenis Kelamin').form-control
+                                .form-group
+                                    label
+                                        | Kepala Keluarga
+                                    input(type='text',value="#{ (kplkeluarga ==undefined) ? data.kplkeluarga : kplkeluarga }",name='kplkeluarga',placeholder='Masukan Nama Kepala Keluarga').form-control
+                            .box-footer
+                                input(type="hidden",name="_method", value="PUT")
+                                button(type='submit').btn.btn-primary
+                                    i.fa.fa-pencil
+                                    | Edit
+                                a(href='/kelahiran').btn.btn-primary.pullright
+                                    | Back
