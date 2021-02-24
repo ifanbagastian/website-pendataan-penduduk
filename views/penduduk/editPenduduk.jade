@@ -1,26 +1,16 @@
 extends ../layout/base
 block content
-    section.content-header
-        h1
-            | Edit Customer
-            small menu for editing customer data
-        ol.breadcrumb
-            li
-                a(href='#')
-                    i.fa.fa-dashboard
-                    | Level
-            li.active Here
     section.content
         .box
             .box-header.with-border
                 h3.box-title
-                    | Customer
+                    | Edit Data Penduduk
             .box-tools.pull-right
                 button(type='button', data-widget='collapse', datatoggle='tooltip',title='collapse').btn.btn-box-tool
                     i.fa.fa-minus
 
             .box-body
-                form(role='form',method='post' action='/customers/edit/#{(id==undefined) ? data.id : id}')
+                form(role='form',method='post' action='/penduduk/editpenduduk/#{(id==undefined) ? data.id : id}')
                     .row
 
                         .col-xs-6
@@ -38,29 +28,37 @@ block content
                                         button.close(type='button', datadismiss='alert', aria-hidden='true')
                                             | ×
                                         h4
-                                            i.icon.fa.fa-ban
-                                            | Success!
+                                            i.icon.fa.fa-check
+                                            | Berhasil!
                                         | !{messages.msg_info}
                                 .form-group
                                     label
-                                        | Name
-                                    input(type='text',value="#{data.name}",name='name',placeholder='Enter Name', autofocus).form-control
+                                        | NIK
+                                    input(type='text',value="#{data.nik}",name='nik',placeholder='Masukan NIK', autofocus).form-control
                                 .form-group
                                     label
-                                        | Address
-                                    input(type='text',value="#{ (address == undefined) ? data.address : address }",name='address',placeholder='Enter address').form-control
+                                        | Nama
+                                    input(type='text',value="#{ (nama == undefined) ? data.nama : nama }",name='nama',placeholder='Masukan Nama').form-control
                                 .form-group
                                     label
-                                        | Email
-                                    input(type='text',value="#{ (email ==undefined) ? data.email : email }",name='email',placeholder='Enter Email').form-control
+                                        | Jenis Kelamin
+                                    input(type='text',value="#{ (jeniskelamin ==undefined) ? data.jeniskelamin : jeniskelamin }",name='jeniskelamin',placeholder='Masukan Jenis Kelamin').form-control
                                 .form-group
                                     label
-                                        | Phone
-                                    input(type='text',value="#{ (phone ==undefined) ? data.phone : phone }",name='phone',placeholder='Enter Phone').form-control
+                                        | Alamat
+                                    input(type='text',value="#{ (alamat ==undefined) ? data.alamat : alamat }",name='alamat',placeholder='Masukan Alamat').form-control
+                                .form-group
+                                    label
+                                        | Agama
+                                    input(type='text',value="#{ (agama ==undefined) ? data.agama : agama }",name='agama',placeholder='Masukan Agama').form-control
+                                .form-group
+                                    label
+                                        | Pekerjaan
+                                    input(type='text',value="#{ (pekerjaan ==undefined) ? data.pekerjaan : pekerjaan }",name='pekerjaan',placeholder='Masukan Pekerjaan').form-control
                             .box-footer
                                 input(type="hidden",name="_method", value="PUT")
                                 button(type='submit').btn.btn-primary
                                     i.fa.fa-pencil
                                     | Edit
-                                a(href='/customers').btn.btn-primary.pullright
+                                a(href='/penduduk').btn.btn-primary.pullright
                                     | Back

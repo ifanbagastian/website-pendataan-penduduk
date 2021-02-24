@@ -49,10 +49,10 @@ block content
                                 for row, index in data
                                     tr
                                         td #{index+1}
-                                        td #{row.name}
-                                        td #{row.address}
-                                        td #{row.email}
-                                        td #{row.phone}
+                                        td #{row.nik}
+                                        td #{row.nama}
+                                        td #{row.tglmeninggal}
+                                        td #{row.penyebab}
                                         td
                                             div(style='display:inlineblock')
                                                 a(href='/customers/edit/#{row.id}').btn.btn-sm.btn-primary

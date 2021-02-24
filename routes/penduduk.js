@@ -5,7 +5,7 @@ var session_store;
 /* GET Penduduk page. */
 router.get('/',function(req, res, next) {
     req.getConnection(function(err,connection){
-        var query = connection.query('SELECT * FROM customer',function(err,rows)
+        var query = connection.query('SELECT * FROM tbpenduduk',function(err,rows)
         {
             if(err)
             var errornya = ("Error Selecting : %s ",err );
@@ -17,38 +17,44 @@ router.get('/',function(req, res, next) {
     });
  });
 module.exports = router;
-router.post('/add',function(req, res, next){
-    req.assert('name', 'Please fill the name').notEmpty();
+router.post('/addpenduduk',function(req, res, next){
+    req.assert('nik', 'Tolong isi NIK').notEmpty();
     var errors = req.validationErrors();
     if (!errors) {
-        v_name = req.sanitize( 'name' ).escape().trim();
-        v_email = req.sanitize( 'email' ).escape().trim();
-        v_address = req.sanitize( 'address' ).escape().trim();
-        v_phone = req.sanitize( 'phone' ).escape();
-        var customer = {
-            name: v_name,
-            address: v_address, 
-            email: v_email,
-            phone : v_phone
+        v_nik = req.sanitize( 'nik' ).escape().trim();
+        v_nama = req.sanitize( 'nama' ).escape().trim();
+        v_jeniskelamin = req.sanitize( 'jeniskelamin' ).escape().trim();
+        v_alamat = req.sanitize( 'alamat' ).escape();
+        v_agama = req.sanitize( 'agama' ).escape();
+        v_pekerjaan = req.sanitize( 'pekerjaan' ).escape();
+        var penduduk = {
+            nik: v_nik,
+            nama: v_nama,
+            jeniskelamin: v_jeniskelamin, 
+            alamat: v_alamat,
+            agama : v_agama,
+            pekerjaan: v_pekerjaan,
         }
-        var insert_sql = 'INSERT INTO customer SET ?';
+        var insert_sql = 'INSERT INTO tbpenduduk SET ?';
         req.getConnection(function(err,connection){
-            var query = connection.query(insert_sql, customer, function(err, result){
+            var query = connection.query(insert_sql, penduduk, function(err, result){
                 if(err)
                 {
                     var errors_detail = ("Error Insert : %s ",err );
                     req.flash('msg_error', errors_detail);
-                    res.render('customer/add-customer',
+                    res.render('penduduk/addPenduduk',
                     {
-                        name: req.param('name'),
-                        address: req.param('address'),
-                        email: req.param('email'),
-                        phone: req.param('phone'),
+                        nik: req.param('nik'),
+                        nama: req.param('nama'),
+                        jeniskelamin: req.param('jeniskelamin'),
+                        alamat: req.param('alamat'),
+                        agama: req.param('agama'),
+                        pekerjaan: req.param('pekerjaan'),
                     });
                 }
                 else{
-                    req.flash('msg_info', 'Create customer success');
-                    res.redirect('/customers');
+                    req.flash('msg_info', 'Berhasil menambah data');
+                    res.redirect('/penduduk');
                 }
             });
         });
@@ -63,84 +69,92 @@ router.post('/add',function(req, res, next){
         }
         errors_detail += "</ul>";
         req.flash('msg_error', errors_detail);
-        res.render('customer/add-customer',
+        res.render('penduduk/addPenduduk',
         {
-            name: req.param('name'),
-            address: req.param('address')
+            nik: req.param('nik'),
+            nama: req.param('nama')
         });
     }
 });
-router.get('/add', function(req, res, next) {
+router.get('/addpenduduk', function(req, res, next) {
     9
-    res.render( 'customer/add-customer',
+    res.render( 'penduduk/addPenduduk',
     {
-        title: 'Add New Customer',
-        name: '',
-        email: '',
-        phone:'',
-        address:''
+        title: 'Add New Penduduk',
+        nik: '',
+        nama: '',
+        jeniskelamin:'',
+        alamat:'',
+        agama:'',
+        pekerjaan:'',
     });
 });
-router.get('/edit/(:id)', function(req,res,next){
+router.get('/editpenduduk/(:id)', function(req,res,next){
     req.getConnection(function(err,connection){
-        var query = connection.query('SELECT * FROM customer where id='+req.params.id,function(err,rows)
+        var query = connection.query('SELECT * FROM tbpenduduk where id='+req.params.id,function(err,rows)
         {
             if(err)
             {
                 var errornya = ("Error Selecting : %s ",err );
                 req.flash('msg_error', errors_detail);
-                res.redirect('/customers');
+                res.redirect('/penduduk');
             }
             else
             {
                 if(rows.length <=0)
                 {
-                    req.flash('msg_error', "Customer can't be find!");
-                    res.redirect('/customers');
+                    req.flash('msg_error', "Penduduk tidak ditemukan");
+                    res.redirect('/penduduk');
                 }
                 else
                 {
                     console.log(rows);
-                    res.render('customer/edit',{title:"Edit ",data:rows[0]});
+                    res.render('penduduk/editPenduduk',{title:"Edit ",data:rows[0]});
                 }
             }
         });
     });
 });
-router.put('/edit/(:id)', function(req,res,next){
-    req.assert('name', 'Please fill the name').notEmpty();
+router.put('/editpenduduk/(:id)', function(req,res,next){
+    req.assert('nik', 'Tolong isi NIK').notEmpty();
     var errors = req.validationErrors();
     if (!errors) {
         10
-        v_name = req.sanitize( 'name' ).escape().trim();
-        v_email = req.sanitize( 'email' ).escape().trim();
-        v_address = req.sanitize( 'address' ).escape().trim();
-        v_phone = req.sanitize( 'phone' ).escape();
+        v_nik = req.sanitize( 'nik' ).escape().trim();
+        v_nama = req.sanitize( 'nama' ).escape().trim();
+        v_jeniskelamin = req.sanitize( 'jeniskelamin' ).escape().trim();
+        v_alamat = req.sanitize( 'alamat' ).escape();
+        v_agama = req.sanitize( 'agama' ).escape();
+        v_pekerjaan = req.sanitize( 'pekerjaan' ).escape();
         
-        var customer = {
-            name: v_name,
-            address: v_address,
-            email: v_email,
-            phone : v_phone
+        var penduduk = {
+            nik: v_nik,
+            nama: v_nama,
+            jeniskelamin: v_jeniskelamin, 
+            alamat: v_alamat,
+            agama : v_agama,
+            pekerjaan: v_pekerjaan,
         }
-        var update_sql = 'update customer SET ? where id = '+req.params.id;
+        var update_sql = 'update tbpenduduk SET ? where id = '+req.params.id;
         req.getConnection(function(err,connection){
-            var query = connection.query(update_sql, customer, function(err, result){
+            var query = connection.query(update_sql, penduduk, function(err, result){
                 if(err)
                 {
                     var errors_detail = ("Error Update : %s ",err );
                     req.flash('msg_error', errors_detail);
-                    res.render('customer/edit',
+                    res.render('penduduk/editPenduduk',
                     {
-                        name: req.param('name'),
-                        address: req.param('address'),
-                        email: req.param('email'),
-                        phone: req.param('phone'),
+                        nik: req.param('nik'),
+                        nama: req.param('nama'),
+                        jeniskelamin: req.param('jeniskelamin'),
+                        alamat: req.param('alamat'),
+                        agama: req.param('agama'),
+                        pekerjaan: req.param('pekerjaan'),
                     });
                 }
                 else{
-                    req.flash('msg_info', 'Update customer success');
-                    res.redirect('/customers/edit/'+req.params.id);
+                    req.flash('msg_info', 'Berhasil memperbarui penduduk');
+                    res.redirect('/penduduk/editpenduduk/'+req.params.id);
                 }
             });
         });
@@ -155,30 +169,30 @@ router.put('/edit/(:id)', function(req,res,next){
         }
         errors_detail += "</ul>";
         req.flash('msg_error', errors_detail);
-        res.render('customer/add-customer',
+        res.render('penduduk/addPenduduk',
         {
-            name: req.param('name'),
-            address: req.param('address')
+            nik: req.param('nik'),
+            nama: req.param('nama')
         });
     }
 });
-router.delete('/delete/(:id)', function(req, res, next) {
+router.delete('/deletependuduk/(:id)', function(req, res, next) {
     req.getConnection(function(err,connection){
-        var customer = {
+        var penduduk = {
             id: req.params.id,
         }
-        var delete_sql = 'delete from customer where ?';
+        var delete_sql = 'delete from tbpenduduk where ?';
         req.getConnection(function(err,connection){
-            var query = connection.query(delete_sql, customer, function(err, result){
+            var query = connection.query(delete_sql, penduduk, function(err, result){
                 if(err)
                 {
                     var errors_detail = ("Error Delete : %s ",err);
                     req.flash('msg_error', errors_detail);
-                    res.redirect('/customers');
+                    res.redirect('/penduduk');
                 }
                 else{
-                    req.flash('msg_info', 'Delete Customer Success');
-                    res.redirect('/customers');
+                    req.flash('msg_info', 'Berhasil hapus penduduk');
+                    res.redirect('/penduduk');
                 }
             });
         });
