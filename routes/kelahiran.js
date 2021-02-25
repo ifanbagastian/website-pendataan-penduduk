@@ -65,8 +65,8 @@ router.post('/addkelahiran',function(req, res, next){
         req.flash('msg_error', errors_detail);
         res.render('kelahiran/addKelahiran',
         {
-            nik: req.param('nama'),
-            nama: req.param('ttl')
+            nama: req.param('nama'),
+            ttl: req.param('ttl')
         });
     }
 });

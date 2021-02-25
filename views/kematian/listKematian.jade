@@ -25,7 +25,7 @@ block content
                             i.icon.fa.fa-ban
                             | Alert!
                         | !{messages.msg_error}
-                a(href='customers/add').pull-left.btn.btn-primary
+                a(href='kematian/addkematian').pull-left.btn.btn-primary
                     i.fa.fa-plus
                     |   Tambah Data 
                 .data-table
@@ -55,11 +55,11 @@ block content
                                         td #{row.penyebab}
                                         td
                                             div(style='display:inlineblock')
-                                                a(href='/customers/edit/#{row.id}').btn.btn-sm.btn-primary
+                                                a(href='/kematian/editkematian/#{row.id}').btn.btn-sm.btn-primary
                                                     i.fa.fa-edit
                                             |    
                                             div(style='display:inlineblock')
-                                                form(method='post', action='/customers/delete/#{row.id}')
+                                                form(method='post', action='/kematian/deletekematian/#{row.id}')
                                                     input(type="hidden",name="_method", value="DELETE")
                                                     button.btn.btn-sm.btn-danger(type='submit')
                                                         i.fa.fa-remove
