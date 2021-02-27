@@ -62,8 +62,7 @@ block content
                                         td
                                             div(style='display:inlineblock')
                                                 a(href='/penduduk/editpenduduk/#{row.id}').btn.btn-sm.btn-primary
-                                                    i.fa.fa-edit
-                                            |    
+                                                    i.fa.fa-edit 
                                             div(style='display:inlineblock')
                                                 form(method='post', action='/penduduk/deletependuduk/#{row.id}')
                                                     input(type="hidden",name="_method", value="DELETE")

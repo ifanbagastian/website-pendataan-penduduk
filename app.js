@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 var flash = require('express-flash');
 var session = require('express-session');
 var index = require('./routes/index');
-var users = require('./routes/users');
-var customers = require('./routes/customers');
 var penduduk = require('./routes/penduduk');
 var Kematian = require('./routes/kematian');
 var kelahiran = require('./routes/kelahiran');
@@ -52,8 +50,6 @@ app.use(
     },'request') //or single
 );
 app.use('/', index);
-app.use('/customers', customers);
-app.use('/users', users);
 app.use('/penduduk', penduduk);
 app.use('/kematian', Kematian);
 app.use('/kelahiran', kelahiran);
